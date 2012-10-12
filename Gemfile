@@ -38,6 +38,7 @@ gem 'jquery-rails'
 
 gem "thin", ">= 1.5.0"
 gem "mongoid", ">= 3.0.9"
+gem "bson_ext"
 gem "haml", ">= 3.1.7"
 gem "haml-rails", ">= 0.3.5", :group => :development
 gem "hpricot", ">= 0.8.6", :group => :development
