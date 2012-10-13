@@ -38,7 +38,7 @@ describe ItemsController do
     it "assigns all items as @items" do
       item = Item.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:items).should eq([item])
+      assigns(:items).should eq(Item.all)
     end
   end
 
