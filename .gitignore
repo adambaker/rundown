@@ -19,6 +19,9 @@ db/*.sqlite3
 /log/*
 /tmp/*
 
+#added for dev mongo db files.
+/db/data/*
+
 # various artifacts
 **.war
 *.rbc
