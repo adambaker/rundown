@@ -32,4 +32,9 @@ class Item
         price_int = ''
       end
     end
+
+    def initialize(attrs={}, opts=nil)
+      attrs[:quantity] ||= 1
+      super(attrs, opts)
+    end
 end

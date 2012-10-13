@@ -31,4 +31,9 @@ describe Item do
     Item.new(@attr.merge({price: ''})).should_not be_valid
     Item.new(@attr.merge({price: '-3'})).should_not be_valid
   end
+
+  it 'should have desired defaults' do
+    i = Item.new
+    i.quantity.should == 1
+  end
 end
