@@ -22,14 +22,14 @@ describe Item do
     Item.new(@attr.merge({quantity: '-3'})).should_not be_valid
   end
 
-  it 'should handle decimals and commas' do
-    item = Item.create(@attr.merge({price: '1,020.50'}))
-    item.price.should == '1020.50'
-  end
-
   it 'should require non-negative price' do
     Item.new(@attr.merge({price: ''})).should_not be_valid
     Item.new(@attr.merge({price: '-3'})).should_not be_valid
+  end
+
+  it 'should handle dollars and commas' do
+    item = Item.create(@attr.merge({price: '$1,020.50'}))
+    item.price.should == 1020.50
   end
 
   it 'should have desired defaults' do
