@@ -12,7 +12,7 @@
   - @items.each do |item|
     %tr
       %td= item.name
-      %td= item.price
+      %td= show_price item.price
       %td= item.quantity
       %td= link_to 'Show', item
       %td= link_to 'Edit', edit_item_path(item)
