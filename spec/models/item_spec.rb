@@ -6,6 +6,7 @@ describe Item do
       name: 'I heart minimalism',
       price: '$20.50',
       quantity: 4,
+      notes: "it's like a poster or something"
     }
   end
 

@@ -3,6 +3,7 @@ class Item
   field :name, type: String
   field :price, type: Float
   field :quantity, type: Integer
+  field :notes, type: String
 
   validates :name, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
