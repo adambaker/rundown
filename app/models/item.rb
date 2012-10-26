@@ -5,6 +5,9 @@ class Item
   field :quantity, type: Integer
   field :notes, type: String
 
+  embeds_one :public
+  accepts_nested_attributes_for :public
+
   validates :name, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :quantity, numericality: {
@@ -25,4 +28,12 @@ class Item
       attrs[:price] = price_to_float(attrs[:price])
       super(attrs, opts)
     end
+end
+
+class Public
+  include Mongoid::Document
+  field :title
+  field :body
+
+  embedded_in :item
 end

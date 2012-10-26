@@ -6,7 +6,11 @@ describe Item do
       name: 'I heart minimalism',
       price: '$20.50',
       quantity: 4,
-      notes: "it's like a poster or something"
+      notes: "it's like a poster or something",
+      public_attributes: {
+        title: 'a minimal story',
+        body: '',
+      },
     }
   end
 
@@ -36,5 +40,11 @@ describe Item do
   it 'should have desired defaults' do
     i = Item.new
     i.quantity.should == 1
+  end
+
+  it 'should save properly' do
+    i = Item.create! @attr
+    i = Item.find(i._id)
+    i.public.title.should == @attr[:public_attributes][:title]
   end
 end
