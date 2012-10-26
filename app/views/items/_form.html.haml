@@ -15,5 +15,15 @@
   .field
     = f.label :quantity
     = f.number_field :quantity
+  = f.fields_for :public, @item.public do |f_pub|
+    %h3 Public Information
+    .field
+      = f_pub.label :title
+      %br
+      = f_pub.text_field :title
+    .field
+      = f_pub.label :body
+      %br
+      = f_pub.text_area :body
   .actions
     = f.submit 'Save'
