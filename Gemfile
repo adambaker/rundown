@@ -27,9 +27,6 @@ gem 'jquery-rails'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
 # Deploy with Capistrano
 # gem 'capistrano'
 
@@ -49,6 +46,5 @@ gem "database_cleaner", ">= 0.9.1", :group => :test
 gem "mongoid-rspec", ">= 1.4.6", :group => :test
 gem "email_spec", ">= 1.2.1", :group => :test
 gem "compass-rails", ">= 1.0.3", :group => :assets
-gem "zurb-foundation", ">= 3.1.1", :group => :assets
 gem "omniauth", ">= 1.1.1"
 gem "omniauth-google-oauth2"
