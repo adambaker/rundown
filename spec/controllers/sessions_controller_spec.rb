@@ -8,7 +8,7 @@ describe SessionsController do
       email:    'fake@phony.lie',
       name:     'someone',
       uid:      'something',
-      provider: 'google',
+      provider: 'google_oauth2',
     }
   end
 
