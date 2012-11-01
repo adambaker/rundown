@@ -1,5 +1,6 @@
 Rundown::Application.routes.draw do
   resources :items
+  resources :users, except: [:edit, :new]
 
   resource  :sessions, only: [:create, :destroy]
   match '/signout' => 'sessions#destroy', as: :sign_out
