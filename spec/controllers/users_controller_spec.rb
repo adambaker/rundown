@@ -80,12 +80,12 @@ describe UsersController do
     end
 
     it 'redirects to login with no user logged in' do
-      put :update, {id: @user.to_param}
+      put :update, {id: @user}
       response.should redirect_to login_path
     end
 
     it 'should update the user with valid params and show the user' do
-      put :update, {id: @user.to_param, user: user_attr.merge(name: 'fool')}, session_for(@user)
+      put :update, {id: @user, user: user_attr.merge(name: 'fool')}, session_for(@user)
       User.find(@user._id).name.should == 'fool'
       response.should render_template('show')
     end
@@ -95,5 +95,28 @@ describe UsersController do
       put :update, {id: @user}, session_for(@user)
       response.should render_template('show')
     end
+  end
+
+  describe 'DELETE destroy' do
+    before :each do
+      @user = a_user
+    end
+
+    it 'redirects to login with no user logged in' do
+      delete :destroy, {id: @user}
+      response.should redirect_to login_path
+    end
+
+    it 'redirects to root' do
+      delete :destroy, {id: @user}, session_for(@user)
+      response.should redirect_to '/'
+    end
+
+    it 'deletes the logged in user' do
+      expect do
+        delete :destroy, {id: @user}, session_for(@user)
+      end.to change(User, :count).by(-1)
+    end
+
   end
 end

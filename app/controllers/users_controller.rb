@@ -31,4 +31,9 @@ class UsersController < ApplicationController
       format.html { render :show }
     end
   end
+
+  def destroy
+    current_user.destroy
+    redirect_to '/', notice: 'User account deleted'
+  end
 end
