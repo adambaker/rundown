@@ -54,9 +54,29 @@ describe UsersController do
 
     it 'redirects to login when no user is logged in' do
       get :show, {id: @user.to_param}
-      response.should redirect_to '/auth/google_oauth2'
+      response.should redirect_to login_path
+    end
+  end
+
+  describe 'GET index' do
+    before :each do
+      @user = a_user
+      @another = a_user user_attr.merge(
+        email: 'anoether@email.com',
+        uid:   12456,
+        name:  'morefolk',
+      )
     end
 
+    it 'redirects to login when no user is logged in' do
+      get :index
+      response.should redirect_to login_path
+    end
+
+    it 'assigns all users as @users' do
+      get :index, {}, session_for(@user)
+      assigns(:users).should == User.all
+    end
   end
 
 end

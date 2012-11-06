@@ -2,6 +2,10 @@ class UsersController < ApplicationController
 
   before_filter :authenticate, except: :create
 
+  def index
+    @users = User.all
+  end
+
   def show
   end
 

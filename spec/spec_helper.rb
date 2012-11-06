@@ -36,4 +36,8 @@ RSpec.configure do |config|
   def session_for(user)
     {user_id: user._id}
   end
+
+  def login_path
+    '/auth/google_oauth2'
+  end
 end
