@@ -24,4 +24,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    current_user.update_attributes params[:user]
+
+    respond_to do |format|
+      format.html { render :show }
+    end
+  end
 end

@@ -84,10 +84,6 @@ describe ItemsController do
     describe "with valid params" do
       it "updates the requested item" do
         item = Item.create! valid_attributes
-        # Assuming there are no other items in the database, this
-        # specifies that the Item created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
         Item.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, {:id => item.to_param, :item => {'these' => 'params'}}, valid_session
       end
@@ -108,7 +104,6 @@ describe ItemsController do
     describe "with invalid params" do
       it "assigns the item as @item" do
         item = Item.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
         Item.any_instance.stub(:save).and_return(false)
         put :update, {:id => item.to_param, :item => {}}, valid_session
         assigns(:item).should eq(item)
@@ -116,7 +111,6 @@ describe ItemsController do
 
       it "re-renders the 'edit' template" do
         item = Item.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
         Item.any_instance.stub(:save).and_return(false)
         put :update, {:id => item.to_param, :item => {}}, valid_session
         response.should render_template("edit")

@@ -61,11 +61,6 @@ describe UsersController do
   describe 'GET index' do
     before :each do
       @user = a_user
-      @another = a_user user_attr.merge(
-        email: 'anoether@email.com',
-        uid:   12456,
-        name:  'morefolk',
-      )
     end
 
     it 'redirects to login when no user is logged in' do
@@ -79,4 +74,26 @@ describe UsersController do
     end
   end
 
+  describe 'PUT update' do
+    before :each do
+      @user = a_user
+    end
+
+    it 'redirects to login with no user logged in' do
+      put :update, {id: @user.to_param}
+      response.should redirect_to login_path
+    end
+
+    it 'should update the user with valid params and show the user' do
+      put :update, {id: @user.to_param, user: user_attr.merge(name: 'fool')}, session_for(@user)
+      User.find(@user._id).name.should == 'fool'
+      response.should render_template('show')
+    end
+
+    it 'rerenders show with an error message with invalid params' do
+      @user.stub(:save).and_return false
+      put :update, {id: @user}, session_for(@user)
+      response.should render_template('show')
+    end
+  end
 end
