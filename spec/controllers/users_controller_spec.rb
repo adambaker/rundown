@@ -27,5 +27,36 @@ describe UsersController do
         flash[:notice].should_not be_nil
       end
     end
+
+    describe 'with invalid attributes' do
+      it 'should not create a new user' do
+        expect do
+          post :create, user: {}
+        end.not_to change(User, :count)
+      end
+
+      it 'should redirect to root' do
+        post :create, user: {}
+        response.should redirect_to '/'
+      end
+
+      it 'should flash an error message' do
+        post :create, user: {}
+        flash[:error].should_not be_nil
+      end
+    end
   end
+
+  describe 'GET show' do
+    before :each do
+      @user = a_user
+    end
+
+    it 'redirects to login when no user is logged in' do
+      get :show, {id: @user.to_param}
+      response.should redirect_to '/auth/google_oauth2'
+    end
+
+  end
+
 end

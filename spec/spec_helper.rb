@@ -27,8 +27,13 @@ RSpec.configure do |config|
     }
   end
 
-  def a_user
-    User::Email.create email: 'fake@phony.lie'
-    User.create user_attr
+  def a_user(attr=nil)
+    attr ||= user_attr
+    User::Email.create email: attr[:email]
+    User.create! attr
+  end
+
+  def session_for(user)
+    {user_id: user._id}
   end
 end
