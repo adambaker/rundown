@@ -9,4 +9,5 @@
     %tr
       %td= user.name
       %td= user.email
-      %td
+      - if user == current_user
+        %td= link_to 'edit name/email', user

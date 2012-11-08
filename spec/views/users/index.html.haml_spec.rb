@@ -2,13 +2,19 @@ require 'spec_helper'
 
 describe "users/index" do
   before(:each) do
-    assign(:users, [
-      stub_model(User, user_attr),
-      stub_model(User, user_attr.merge(
+    @user = stub_model(User,
+      user_attr.merge(
         email: 'another@email.com',
         name:  'tellingly original',
         uid:   'auoethu',
-      ))
+      )
+    )
+    ActionView::TestCase::TestController.any_instance.stub(
+      current_user: @user
+    )
+    assign(:users, [
+      stub_model(User, user_attr),
+      @user,
     ])
   end
 
