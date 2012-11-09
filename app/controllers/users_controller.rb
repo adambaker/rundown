@@ -25,7 +25,10 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.update_attributes params[:user]
+    current_user.update_attributes(
+      name:  params[:user][:name],
+      email: params[:user][:email],
+    )
 
     respond_to do |format|
       format.html { render :show }

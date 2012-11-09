@@ -92,7 +92,7 @@ describe UsersController do
 
     it 'rerenders show with an error message with invalid params' do
       @user.stub(:save).and_return false
-      put :update, {id: @user}, session_for(@user)
+      put :update, {id: @user, user: user_attr}, session_for(@user)
       response.should render_template('show')
     end
   end
