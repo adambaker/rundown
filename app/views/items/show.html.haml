@@ -1,15 +1,7 @@
-%p#notice= notice
+%h1 Editing item
 
-%p
-  %b Name:
-  = @item.name
-%p
-  %b Price:
-  = @item.price
-%p
-  %b Quantity:
-  = @item.quantity
+= render 'form'
 
-= link_to 'Edit', edit_item_path(@item)
+= link_to 'Show', @item
 \|
 = link_to 'Back', items_path

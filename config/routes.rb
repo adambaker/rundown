@@ -2,7 +2,7 @@ Rundown::Application.routes.draw do
   get "pages/home"
   root to: 'pages#home'
 
-  resources :items
+  resources :items, except: [:edit]
   resources :users, except: [:edit, :new]
 
   resource  :sessions, only: [:create, :destroy]

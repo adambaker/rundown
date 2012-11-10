@@ -35,14 +35,6 @@ describe ItemsController do
     end
   end
 
-  describe "GET edit" do
-    it "assigns the requested item as @item" do
-      item = Item.create! valid_attributes
-      get :edit, {:id => item.to_param}, valid_session
-      assigns(:item).should eq(item)
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Item" do
@@ -65,14 +57,12 @@ describe ItemsController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved item as @item" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Item.any_instance.stub(:save).and_return(false)
         post :create, {:item => {}}, valid_session
         assigns(:item).should be_a_new(Item)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Item.any_instance.stub(:save).and_return(false)
         post :create, {:item => {}}, valid_session
         response.should render_template("new")
@@ -109,11 +99,11 @@ describe ItemsController do
         assigns(:item).should eq(item)
       end
 
-      it "re-renders the 'edit' template" do
+      it "re-renders the 'show' template" do
         item = Item.create! valid_attributes
         Item.any_instance.stub(:save).and_return(false)
         put :update, {:id => item.to_param, :item => {}}, valid_session
-        response.should render_template("edit")
+        response.should render_template("show")
       end
     end
   end

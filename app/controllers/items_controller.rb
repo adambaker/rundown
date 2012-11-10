@@ -32,11 +32,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # GET /items/1/edit
-  def edit
-    @item = Item.find(params[:id])
-  end
-
   # POST /items
   # POST /items.json
   def create
@@ -63,7 +58,7 @@ class ItemsController < ApplicationController
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "show" }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
