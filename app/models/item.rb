@@ -27,6 +27,8 @@ class Item
       attrs[:quantity] ||= 1
       attrs[:price] = price_to_float(attrs[:price])
       super(attrs, opts)
+      self.public or self.build_public
+      self
     end
 end
 

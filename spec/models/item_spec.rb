@@ -40,6 +40,8 @@ describe Item do
   it 'should have desired defaults' do
     i = Item.new
     i.quantity.should == 1
+    i.should respond_to :public
+    i.public.should respond_to :body
   end
 
   it 'should save properly' do
@@ -47,4 +49,5 @@ describe Item do
     i = Item.find(i._id)
     i.public.title.should == @attr[:public_attributes][:title]
   end
+
 end
