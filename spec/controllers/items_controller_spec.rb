@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe ItemsController do
+  before :all do
+    @user = a_user
+  end
+
   def valid_attributes
     {
       name: 'a wacky poster',
@@ -9,7 +13,7 @@ describe ItemsController do
     }
   end
   def valid_session
-    {}
+    {user_id: @user._id}
   end
 
   describe "GET index" do
@@ -17,6 +21,11 @@ describe ItemsController do
       item = Item.create! valid_attributes
       get :index, {}, valid_session
       assigns(:items).should == Item.all
+    end
+
+    it 'requires you to be logged in' do
+      get :index
+      response.should redirect_to '/auth/google_oauth2'
     end
   end
 
@@ -33,9 +42,19 @@ describe ItemsController do
       get :new, {}, valid_session
       assigns(:item).should be_a_new(Item)
     end
+
+    it 'requires you to be logged in' do
+      get :new
+      response.should redirect_to '/auth/google_oauth2'
+    end
   end
 
   describe "POST create" do
+    it 'requires you to be logged in' do
+      get :index
+      response.should redirect_to '/auth/google_oauth2'
+    end
+
     describe "with valid params" do
       it "creates a new Item" do
         expect {
@@ -71,6 +90,12 @@ describe ItemsController do
   end
 
   describe "PUT update" do
+
+    it 'requires you to be logged in' do
+      get :index
+      response.should redirect_to '/auth/google_oauth2'
+    end
+
     describe "with valid params" do
       it "updates the requested item" do
         item = Item.create! valid_attributes
@@ -111,6 +136,12 @@ describe ItemsController do
   end
 
   describe "DELETE destroy" do
+
+    it 'requires you to be logged in' do
+      get :index
+      response.should redirect_to '/auth/google_oauth2'
+    end
+
     it "destroys the requested item" do
       item = Item.create! valid_attributes
       expect {
